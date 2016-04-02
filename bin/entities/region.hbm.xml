@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+ 
+  <class name="entities.Region" table="REGIONS">
+      <id name="id" column="region_id">
+          <generator class="assigned"/>
+      </id>
+      <property name="name" column="region_name"/>
+      <set inverse="true" name="countries">
+          <key column="region_id" />
+          <one-to-many class="entities.Country"/>
+      </set>
+  </class>
+  <class name="entities.Country" table="Countries">
+      <id name="id" column="COUNTRY_ID">
+          <generator class="assigned"/>
+      </id>
+      <property name="name" column="COUNTRY_NAME" type="string"/>
+      <many-to-one cascade="all" class="entities.Region" name="region" column="REGION_ID"/>
+  </class>
+ 
+
+
+</hibernate-mapping>
